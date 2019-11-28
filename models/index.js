@@ -1,4 +1,5 @@
 const mysql = require('mysql2');
+require('dotenv').config();
 
 
 // create the connection to database
@@ -17,9 +18,9 @@ var knex = require('knex')({
   client: 'mysql2',
   connection: {
     host : '127.0.0.1',
-    user : 'sammy',
-    password : 'ebusam12',
-    database : 'sammy_test'
+    user : process.env.DB_USERNAME,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_DATABASE
   },
   pool: { min: 0, max: 7 }
 });
