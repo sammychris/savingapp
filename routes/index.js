@@ -1,7 +1,8 @@
-const { user, details } = require('../controller')
+const { user, details } = require('../controller');
+const { validators } = require('../middlewares');
 
-
+console.log(validators)
 module.exports = (app) => {
-	app.post('/api/w', user.register);
-	app.post('/api/s', user.login);
+	app.post('/api/user/register', validators.register, user.register);
+	app.post('/api/user/login', validators.login, user.login);
 }
