@@ -12,16 +12,10 @@ app.get('/', (req, res) => {
 	res.send('Testing my server side!');
 })
 
-db('test').insert(
-	[{
-		'firstname': 'samuel',
-		'lastname': 'John',
-		'email': 'ebusameric@gmail.com',
-		'password': 'sammychris12'
-	}]
-).then(a => console.log('inserted successfully!'))
+// db.select('*').from('test')
+// 	.then(a => console.log(a));
 
-db.select('*').from('test')
-	.then(a => console.log(a));
+// linking our routes...
+require('./routes')(app);
 
 app.listen(8000, () => console.log('listing on port 8000'));
