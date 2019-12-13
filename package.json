@@ -10,13 +10,21 @@
   "author": "Samuel C. Okanume",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
     "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.2",
+    "morgan": "^1.9.1",
     "mysql2": "^2.0.1",
     "nodemailer": "^6.3.1",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
