@@ -1,7 +1,7 @@
-const express = require('express');
-const auth 		= require('./middlewares/auth');
-const routes  = require('./routes');
-const app     = express();
+const express  			= require('express');
+const routes   			= require('./routes');
+const { passport }  = require('./middlewares');
+const app      			= express();
 
 
 app.use(express.json());
@@ -19,8 +19,9 @@ app.get('/login', (req, res) => {
 // db.select('*').from('test')
 // 	.then(a => console.log(a));
 
-// authentication...
-auth(app);
+// authenticating passport...
+passport(app);
+
 // linking our routes...
 routes(app);
 
