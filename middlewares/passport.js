@@ -1,16 +1,22 @@
-const db            = require('../models');
+const passport    = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
+    ExtractJwt    = require('passport-jwt').ExtractJwt;
+
+const db          = require('../models');
 
 
 
 const opts = {}
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.JWT_SECRET;
+opts.secretOrKey    = process.env.JWT_SECRET;
 
 
-module.exports = function (passport) {
+module.exports = function (app) {
+
+    // Initiallize Passport...
+    app.use(passport.initialize());
+
     passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
         db('users').where({ id: jwt_payload.id })
             .then(user => {
