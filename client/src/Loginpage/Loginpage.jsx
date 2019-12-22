@@ -25,7 +25,7 @@ class Loginpage extends React.Component {
 						  </Button>
 						</ButtonToolbar>
 						<Form.Text className="text-muted">
-							 <br/>
+							<br/>
 				      Don't have an account? <Link to="/register">Register</Link>
 					  </Form.Text>
 						<hr/>OR<hr/>
