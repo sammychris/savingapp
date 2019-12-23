@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Form, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { logIn } from '../services';
 
 const socialStyle = {
 	display: 'flex',
@@ -9,18 +10,49 @@ const socialStyle = {
 }
 
 class Loginpage extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			email:'',
+			password: '',
+		}
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleSubmit(e){
+		e.preventDefault();
+		const { email, password } = this.state;
+		const { history } = this.props;
+		logIn('/api/user/login', {email, password})
+			.then(res => {
+				if(!res.token) {
+					console.log(res.message);
+					return res.message;
+				}
+				history.push('/dashboard');
+			});
+	}
+
+	handleChange(e){
+		const { name, value } = e.target;
+		this.setState({
+			[name]: value
+		})
+	}
+
 	render() {
 		return (
 			<Container style={{ maxWidth: '500px', paddingTop: '50px'}}>
   			<h2>Login</h2>
 				<Jumbotron>
-					<Form>
+					<Form onSubmit={this.handleSubmit}>
 						<Form.Label>Log in using your social media accounts</Form.Label>
 						<ButtonToolbar style={socialStyle}>
-						  <Button variant="primary" type="submit">
+						  <Button variant="primary">
 						    <i className="fab fa-facebook-f"></i> Login with Facebook
 						  </Button>
-						  <Button variant="danger" type="submit">
+						  <Button variant="danger">
 						    <i className="fab fa-google-plus-g"></i> Login with Google
 						  </Button>
 						</ButtonToolbar>
@@ -35,7 +67,7 @@ class Loginpage extends React.Component {
 						    <Form.Text className="text-muted">
 					      	The email you used to sign up
 						    </Form.Text>
-						    <Form.Control type="email" placeholder="Enter email" />
+						    <Form.Control name="email" type="email" placeholder="Enter email" onChange={this.handleChange}/>
 						  </Form.Group>
 
 						  <Form.Group controlId="formBasicPassword">
@@ -43,7 +75,7 @@ class Loginpage extends React.Component {
 						    <Form.Text className="text-muted">
 					      	Don't let anybody see!
 						    </Form.Text>
-						    <Form.Control type="password" placeholder="Password" />
+						    <Form.Control name="password" type="password" placeholder="Password" onChange={this.handleChange}/>
 						  </Form.Group>
 
 						  <div style={{display: "flex", justifyContent: "space-between"}}>
