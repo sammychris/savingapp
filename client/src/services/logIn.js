@@ -1,26 +1,9 @@
-import logOut from './logOut';
-
-const postRequestOptions = (data) => { // post Options
-  return {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify(data),
-  };
-};
-
-
-function validateJson(res) {
-  if (!res.ok) {
-    logOut();
-    window.location.reload(true);
-    return Promise.reject(res.statusText);
-  }
-  return res.json();
-}
+import validateJson from './validateJson';
+import requestOption from './requestOption';
 
 
 function logIn(url, data) { // Login A User
-  return fetch(url, postRequestOptions(data))
+  return fetch(url, requestOption('POST', data))
     .then(validateJson)
     .then((res) => {
       if (res.token) {
