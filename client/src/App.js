@@ -1,26 +1,28 @@
 import React from 'react';
 import './App.css';
-import Homepage from './Homepage';
+import Landingpage from './Landingpage';
 import Loginpage from './Loginpage';
 import Registerpage from './Registerpage';
 import Userpage from './Userpage';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Navigation } from './Components';
+import { ProtectedRoute, PublicRoute } from './helpers';
 
 
 function App() {
   return (
-      <Router>
-        <Navigation />
+    <Router>
+      <Navigation />
+      <div className="App">
         <Switch>
-          <div className="App">
-            <Route exact path="/" component={Homepage} />
-            <Route path="/login"  component={Loginpage} />
-            <Route path="/register"  component={Registerpage} />
-            <Route path="/dashboard"  component={Userpage} />
-          </div>
+        <PublicRoute exact path="/" component={Landingpage}/>
+        <PublicRoute exact path="/login" component={Loginpage}/>
+        <PublicRoute exact path="/register" component={Registerpage}/>
+        <ProtectedRoute exact path="/dashboard" component={Userpage} />
+        <Route path="*" component={() => '404 Page Not Found!'} />
         </Switch>
-      </Router>
+      </div>
+    </Router>
   );
 }
 
