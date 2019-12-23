@@ -18,6 +18,8 @@ class Loginpage extends React.Component {
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleFacebook = this.handleFacebook.bind(this);
+		this.handleGoogle = this.handleGoogle.bind(this);
 	}
 
 	handleSubmit(e){
@@ -32,6 +34,24 @@ class Loginpage extends React.Component {
 				}
 				history.push('/dashboard');
 			});
+	}
+
+	handleFacebook(){
+
+		fetch('/auth/facebook')
+			.then(res => {
+				console.log(res);
+			})
+
+	}
+
+	handleGoogle(){
+
+		fetch('/auth/facebook')
+			.then(res => {
+				console.log(res);
+			})
+
 	}
 
 	handleChange(e){
@@ -49,10 +69,10 @@ class Loginpage extends React.Component {
 					<Form onSubmit={this.handleSubmit}>
 						<Form.Label>Log in using your social media accounts</Form.Label>
 						<ButtonToolbar style={socialStyle}>
-						  <Button variant="primary">
+						  <Button variant="primary" onClick={this.handleFacebook}>
 						    <i className="fab fa-facebook-f"></i> Login with Facebook
 						  </Button>
-						  <Button variant="danger">
+						  <Button variant="danger" onClick={this.handleGoogle}>
 						    <i className="fab fa-google-plus-g"></i> Login with Google
 						  </Button>
 						</ButtonToolbar>
@@ -75,7 +95,7 @@ class Loginpage extends React.Component {
 						    <Form.Text className="text-muted">
 					      	Don't let anybody see!
 						    </Form.Text>
-						    <Form.Control name="password" type="password" placeholder="Password" onChange={this.handleChange}/>
+						    <Form.Control autocomplete="new-password" name="password" type="password" placeholder="Password" onChange={this.handleChange}/>
 						  </Form.Group>
 
 						  <div style={{display: "flex", justifyContent: "space-between"}}>
