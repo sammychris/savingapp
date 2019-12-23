@@ -44,7 +44,7 @@ module.exports = {
 			    pay_load.password 	= user.password;
 
 					// loggedin successs and create a token
-					const token = jwt.sign(pay_load, process.env.JWT_SECRET);
+					const token = 'Bearer '+jwt.sign(pay_load, process.env.JWT_SECRET);
 
 				  return res.json({ user, token });
 
