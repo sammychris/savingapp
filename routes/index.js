@@ -1,6 +1,6 @@
-const passport          = require('passport');
-const { user, details } = require('../controller');
-const { validators }    = require('../middlewares');
+const passport          						 = require('passport');
+const { user, details } 						 = require('../controller');
+const { validators, passportConfig } = require('../middlewares');
 
 
 // function ensureAuthenticated(req, res, next) {
@@ -19,10 +19,6 @@ module.exports = (app) => {
 	app.get('/auth/facebook', passport.authenticate('facebook'));
 
 	app.get('/auth/facebook/callback',
-	  passport.authenticate('facebook', { failureRedirect: '/login' }),
-		  function(req, res) {
-		  	console.log('welcome sir')
-		    // Successful authentication, redirect home.
-		    res.redirect('/');
-		  });
+  passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/register' }), user.fbLogin);
+
 }
