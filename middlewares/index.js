@@ -1,8 +1,8 @@
 const validators = require('./validators');
-const passport = require('./passport');
+const passportConfig = require('./passportConfig');
 
 
 module.exports = {
 	validators,
-	passport
+	passportConfig
 }
