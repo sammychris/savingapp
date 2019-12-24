@@ -36,30 +36,14 @@ class Loginpage extends React.Component {
 			});
 	}
 
-	handleFacebook(){
-
-		fetch('/auth/facebook')
-			.then(res => {
-				console.log(res);
-			})
-
-	}
-
-	handleGoogle(){
-
-		fetch('/auth/facebook')
-			.then(res => {
-				console.log(res);
-			})
-
-	}
-
 	handleChange(e){
 		const { name, value } = e.target;
 		this.setState({
 			[name]: value
 		})
 	}
+
+	componentDidMount(){}
 
 	render() {
 		return (
@@ -69,10 +53,12 @@ class Loginpage extends React.Component {
 					<Form onSubmit={this.handleSubmit}>
 						<Form.Label>Log in using your social media accounts</Form.Label>
 						<ButtonToolbar style={socialStyle}>
-						  <Button variant="primary" onClick={this.handleFacebook}>
-						    <i className="fab fa-facebook-f"></i> Login with Facebook
-						  </Button>
-						  <Button variant="danger" onClick={this.handleGoogle}>
+						  <a href="http://localhost:8000/auth/facebook">
+						  	<Button variant="primary">
+						    	<i className="fab fa-facebook-f"></i> Login with Facebook
+						  	</Button>
+						  </a>
+						  <Button variant="danger">
 						    <i className="fab fa-google-plus-g"></i> Login with Google
 						  </Button>
 						</ButtonToolbar>
