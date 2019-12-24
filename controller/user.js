@@ -53,6 +53,20 @@ module.exports = {
 			});
 	},
 
+	fbLogin(req, res){
+		console.log('making sure')
+		const pay_load = {};
+		pay_load.firstname = 'Samuel';
+		pay_load.lastname = 'Christopher';
+		const token = 'Bearer '+jwt.sign(pay_load, process.env.JWT_SECRET);
+  	//res.json({ welcome: 'This is cool!' });
+  	//console.log(req.user);
+  	//res.setHeader('authorization', token);
+  	//res.redirect('/authenticated');
+
+		res.redirect('http://localhost:3000/authenticated?token='+token+'&'+'user='+JSON.stringify(req.user));
+	},
+
 	account(req, res){
 
 	},
