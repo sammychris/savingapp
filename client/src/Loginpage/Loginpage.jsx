@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Form, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
+import { Container, Form, Jumbotron, Button, ButtonToolbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { logIn } from '../services';
 
@@ -18,8 +18,6 @@ class Loginpage extends React.Component {
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.handleFacebook = this.handleFacebook.bind(this);
-		this.handleGoogle = this.handleGoogle.bind(this);
 	}
 
 	handleSubmit(e){
@@ -42,8 +40,6 @@ class Loginpage extends React.Component {
 			[name]: value
 		})
 	}
-
-	componentDidMount(){}
 
 	render() {
 		return (
@@ -81,7 +77,7 @@ class Loginpage extends React.Component {
 						    <Form.Text className="text-muted">
 					      	Don't let anybody see!
 						    </Form.Text>
-						    <Form.Control autocomplete="new-password" name="password" type="password" placeholder="Password" onChange={this.handleChange}/>
+						    <Form.Control name="password" type="password" placeholder="Password" onChange={this.handleChange}/>
 						  </Form.Group>
 
 						  <div style={{display: "flex", justifyContent: "space-between"}}>
