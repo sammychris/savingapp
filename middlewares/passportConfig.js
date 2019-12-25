@@ -28,7 +28,6 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     db('users').where({ id: jwt_payload.id })
         .then(user => {
-            console.log(user)
             if (!user) return done(null, false);
             return done(null, user);
         })
@@ -41,15 +40,40 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "http://localhost:8000/auth/facebook/callback",
+    profileFields: ['id', 'displayName', 'photos', 'email', 'name']
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log(accessToken );
-    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
-    let obj = {};
-    obj.firstname = 'Samuel';
-    obj.lastname = 'okanume';
-    done(null, profile)
+    const { id, first_name, last_name, email, picture } = profile._json;
+
+    db('users').where({ email })
+        .then(users => {
+
+            const user = users[0];
+            const newUser = {};
+
+            if(user) {
+                if(user.facebook_id) return done(null, user);
+                user.facebook_id = id;
+                user.picture = `https://graph.facebook.com/${id}/picture?type=large`;
+                db('users')
+                    .where({ id: user.id })
+                    .update(user).then(() => {
+                        done(null, user);
+                    });
+            }
+            else {
+            
+                newUser.facebook_id = id;
+                newUser.firstname   = first_name;
+                newUser.lastname    = last_name;
+                newUser.email       = email;
+                newUser.picture     = `https://graph.facebook.com/${id}/picture?type=large`;
+
+                db('users').insert([newUser])
+                    .then(() => done(null, newUser));
+
+            }
+
+        })
   }
 ));
