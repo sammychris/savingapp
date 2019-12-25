@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Form, Jumbotron, Button } from 'react-bootstrap';
+import { Container, Col, Form, Jumbotron, Button } from 'react-bootstrap';
 
 class Registerpage extends React.Component {
 	render() {
