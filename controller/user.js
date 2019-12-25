@@ -37,7 +37,7 @@ module.exports = {
 				  // passed is equal to false...
 				  if(!passed) return res.json({ message: '!Wrong Password!'});
 
-				  pay_load.id 				= user.id,
+				  pay_load.id 				= user.id;
 			    pay_load.firstname 	= user.firstname;
 			    pay_load.lastname 	= user.lastname;
 			    pay_load.email 			= user.email;
@@ -54,15 +54,15 @@ module.exports = {
 	},
 
 	fbLogin(req, res){
-		console.log('making sure')
+		const { firstname, lastname, email, password, id } = req.user;
 		const pay_load = {};
-		pay_load.firstname = 'Samuel';
-		pay_load.lastname = 'Christopher';
+		pay_load.id 				= id;
+		pay_load.firstname 	= firstname;
+		pay_load.lastname 	= lastname;
+    pay_load.email 			= email;
+    pay_load.password 	= password;
+
 		const token = 'Bearer '+jwt.sign(pay_load, process.env.JWT_SECRET);
-  	//res.json({ welcome: 'This is cool!' });
-  	//console.log(req.user);
-  	//res.setHeader('authorization', token);
-  	//res.redirect('/authenticated');
 
 		res.redirect('http://localhost:3000/authenticated?token='+token+'&'+'user='+JSON.stringify(req.user));
 	},
