@@ -10,7 +10,7 @@ export default ({ component: Component, ...rest }) => {
 				}
 				else {
 					return <Redirect to={{
-						pathname: '/dashboard',
+						pathname: '/user/dashboard',
 						state: {
 							from: props.location
 						}
