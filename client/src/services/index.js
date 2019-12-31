@@ -1,6 +1,7 @@
 // import authHeader from '../helpers';
 import logIn from './logIn';
 import getUsers from './getUsers';
+import logOut from './logOut';
 
 // function logOut() {
 //   // remove user from local storage to log user out
@@ -88,5 +89,6 @@ import getUsers from './getUsers';
 
 export {
   logIn,
-  getUsers
+  getUsers,
+  logOut
 };
